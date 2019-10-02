@@ -1,5 +1,8 @@
 package mastermind;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MasterMind {
     private Character[] code;
 
@@ -9,23 +12,24 @@ public class MasterMind {
 
 
     public Character[] play(Character[] guess) {
-        boolean match = false;
-        // color matches
-        for(Character code_item : this.code) {
-            for(Character guess_item : guess ) {
-                if (code_item == guess_item) {
-                    match = true;
+
+        List<Character> feedback = new ArrayList<>();
+
+        for (int guessIndex = 0; guessIndex < guess.length; guessIndex++) {
+            for (int codeIndex = 0; codeIndex < code.length; codeIndex++) {
+                if (guess[guessIndex] == code[codeIndex]) {
+                    if (guessIndex == codeIndex) {
+                        feedback.add('R');
+                    }
+                    else {
+                        feedback.add('W');
+                    }
                 }
+
             }
         }
 
-
-        if (match == true) {
-            return new Character[] {'W'};
-        }
-        else {
-            // if no match
-            return new Character[0];
-        }
+        return feedback.toArray(new Character[feedback.size()]);
     }
+
 }
