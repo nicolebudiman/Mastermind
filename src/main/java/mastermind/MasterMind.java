@@ -1,41 +1,39 @@
 package mastermind;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MasterMind {
-    private Character[] code;
+    private ArrayList<Character> code;
 
-    public MasterMind(Character[] code) {
+    public MasterMind(ArrayList<Character> code) {
         this.code = code;
     }
 
+    public ArrayList<Character> play(ArrayList<Character> guess) {
 
-    public Character[] play(Character[] guess) {
-
-        List<Character> feedback = new ArrayList<>();
+        ArrayList<Character> feedback = new ArrayList<>();
 
         // TODO - once you have identified that guess[n] == code[n],
         //        then you must never compare anything to guess[n] or code[n]
 
-        for (int guessIndex = 0; guessIndex < guess.length; guessIndex++) {
-            for (int codeIndex = 0; codeIndex < code.length; codeIndex++) {
-                if (guess[guessIndex] == code[codeIndex]) {
+        for (int guessIndex = 0; guessIndex < guess.size(); guessIndex++) {
+            for (int codeIndex = 0; codeIndex < code.size(); codeIndex++) {
+                if (guess.get(guessIndex) == code.get(codeIndex)) {
                     if (guessIndex == codeIndex) {
                         feedback.add('R');
-                        code[codeIndex] = 'X';
+                        code.remove(codeIndex);
+                        guess.remove(guessIndex);
+                        codeIndex--;
+                        guessIndex--;
                         break;
                     }
                     else {
                         feedback.add('W');
                     }
-
                 }
-
             }
         }
-
-        return feedback.toArray(new Character[feedback.size()]);
+        return feedback;
     }
 
 }
