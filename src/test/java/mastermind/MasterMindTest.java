@@ -16,7 +16,7 @@ public class MasterMindTest {
     }
 
     @Test
-    public void noMatchesGetsNoFeedback() {
+    public void noMatchesGetsNoFeedback() throws Exception {
 
         // given
         List<Character> code = new LinkedList<>();
@@ -41,7 +41,7 @@ public class MasterMindTest {
     }
 
     @Test
-    public void correctColorIncorrectPositionGetsOneWhite() {
+    public void correctColorIncorrectPositionGetsOneWhite() throws Exception {
 
         // given
         ArrayList<Character> code = new ArrayList<Character>();
@@ -68,7 +68,7 @@ public class MasterMindTest {
 
 
     @Test
-    public void correctColorCorrectPositionGetsOneRed() {
+    public void correctColorCorrectPositionGetsOneRed() throws Exception {
 
         // given
         ArrayList<Character> code = new ArrayList<Character>();
@@ -93,7 +93,7 @@ public class MasterMindTest {
     }
 
     @Test
-    public void getsOneWhiteOneRed() {
+    public void getsOneWhiteOneRed() throws Exception {
 
         // given
         ArrayList<Character> code = new ArrayList<Character>();
@@ -118,7 +118,7 @@ public class MasterMindTest {
     }
 
     @Test
-    public void perfectMatchGetsAllRed() {
+    public void perfectMatchGetsAllRed() throws Exception {
 
         // given
         ArrayList<Character> code = new ArrayList<Character>();
@@ -143,7 +143,7 @@ public class MasterMindTest {
     }
 
     @Test
-    public void perfectMatchWinsAndEndsTheGame() {
+    public void perfectMatchWinsAndEndsTheGame() throws Exception {
 
         // given
         ArrayList<Character> code = new ArrayList<Character>();
@@ -163,7 +163,7 @@ public class MasterMindTest {
             masterMind.play(code); // this should throw an exception
             fail("should have thrown an exception");
 
-        } catch(RuntimeException e) {
+        } catch(GameOverException e) {
             // then
             assertThat(e.getMessage()).isEqualTo("Game over, you won!");
         }
@@ -171,7 +171,7 @@ public class MasterMindTest {
     }
 
     @Test
-    public void sameGuessThatDoesNotMatchTheCodeGetsSameFeedback() {
+    public void sameGuessThatDoesNotMatchTheCodeGetsSameFeedback() throws Exception {
 
         // given
         ArrayList<Character> code = new ArrayList<Character>();
@@ -203,7 +203,7 @@ public class MasterMindTest {
     }
 
     @Test
-    public void tenFailedGuessesLosesTheGame() {
+    public void tenFailedGuessesLosesTheGame() throws Exception {
 
         // given
         ArrayList<Character> code = new ArrayList<Character>();
@@ -231,7 +231,7 @@ public class MasterMindTest {
             masterMind.play(guess); // this should throw an exception
             fail("should have thrown an exception");
 
-        } catch(RuntimeException e) {
+        } catch(GameOverException e) {
             // then
             assertThat(e.getMessage()).isEqualTo("Game over, you lost!");
         }

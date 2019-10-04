@@ -14,14 +14,14 @@ public class MasterMind {
         this.code = code;
     }
 
-    public List<Character> play(List<Character> guess) {
+    public List<Character> play(List<Character> guess) throws GameOverException {
 
         if (solved == true) {
-            throw new RuntimeException("Game over, you won!");
+            throw new GameOverException("Game over, you won!");
         }
 
         if (numAttempt == MAX_ATTEMPTS) {
-            throw new RuntimeException("Game over, you lost!");
+            throw new GameOverException("Game over, you lost!");
         }
 
         this.numAttempt++;
@@ -58,6 +58,7 @@ public class MasterMind {
                 }
             }
         }
+
         return feedback;
     }
 
