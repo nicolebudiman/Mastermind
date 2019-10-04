@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class MasterMindTest {
@@ -17,7 +19,7 @@ public class MasterMindTest {
     public void noMatchesGetsNoFeedback() {
 
         // given
-        ArrayList<Character> code = new ArrayList<Character>();
+        List<Character> code = new LinkedList<>();
         code.add('R');
         code.add('R');
         code.add('R');
@@ -32,7 +34,7 @@ public class MasterMindTest {
         guess.add('Y');
 
         // when
-        ArrayList<Character> feedback = masterMind.play(guess);
+        List<Character> feedback = masterMind.play(guess);
 
         // then
         assertThat(feedback).isEmpty();
@@ -57,7 +59,7 @@ public class MasterMindTest {
         guess.add('Y');
 
         // when
-        ArrayList<Character> feedback = masterMind.play(guess);
+        List<Character> feedback = masterMind.play(guess);
 
         // then
         assertThat(code).containsExactly('R', 'B', 'R', 'R');
@@ -84,7 +86,7 @@ public class MasterMindTest {
         guess.add('Y');
 
         // when
-        ArrayList<Character> feedback = masterMind.play(guess);
+        List<Character> feedback = masterMind.play(guess);
 
         // then
         assertThat(feedback).containsExactly('R');
@@ -109,7 +111,7 @@ public class MasterMindTest {
         guess.add('Y');
 
         // when
-        ArrayList<Character> feedback = masterMind.play(guess);
+        List<Character> feedback = masterMind.play(guess);
 
         // then
         assertThat(feedback).containsExactlyInAnyOrder('W', 'R');
@@ -134,7 +136,7 @@ public class MasterMindTest {
         guess.add('B');
 
         // when
-        ArrayList<Character> feedback = masterMind.play(guess);
+        List<Character> feedback = masterMind.play(guess);
 
         // then
         assertThat(feedback).containsExactlyInAnyOrder('R', 'R', 'R', 'R');

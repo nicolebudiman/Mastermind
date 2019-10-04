@@ -1,15 +1,17 @@
 package mastermind;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MasterMind {
-    private ArrayList<Character> code;
 
-    public MasterMind(ArrayList<Character> code) {
+    private List<Character> code;
+
+    public MasterMind(List<Character> code) {
         this.code = code;
     }
 
-    public ArrayList<Character> play(ArrayList<Character> guess) {
+    public List<Character> play(List<Character> guess) {
 
         ArrayList<Character> feedback = new ArrayList<>();
 
