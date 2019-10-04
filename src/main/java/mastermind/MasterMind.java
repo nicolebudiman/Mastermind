@@ -10,10 +10,15 @@ public class MasterMind {
     private int numAttempt = 0;
     private boolean solved = false;
 
+    // TODO - Challenge: make this accept Character[] rather than List<Character>
     public MasterMind(List<Character> code) {
         this.code = code;
     }
 
+
+    // TODO - together, let's change this to throw a specific GameOverException
+    // indicating won or lost, rather than GameOverException(..) with a message
+    // TODO - change this to accept and return Character[] rather than List<Character>
     public List<Character> play(List<Character> guess) throws GameOverException {
 
         if (solved == true) {
@@ -35,6 +40,8 @@ public class MasterMind {
 
         // TODO - once you have identified that guess[n] == code[n],
         //        then you must never compare anything to guess[n] or code[n]
+
+
 
         int counter = 0;
         for (int guessIndex = 0; guessIndex < copyOfGuess.size(); guessIndex++) {
