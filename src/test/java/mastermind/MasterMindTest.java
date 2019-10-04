@@ -142,4 +142,72 @@ public class MasterMindTest {
         assertThat(feedback).containsExactlyInAnyOrder('R', 'R', 'R', 'R');
     }
 
+    @Test
+    public void sameGuessTwiceGetsSameFeedback() {
+
+        // given
+        ArrayList<Character> code = new ArrayList<Character>();
+        code.add('Y');
+        code.add('B');
+        code.add('Y');
+        code.add('Y');
+
+        MasterMind masterMind = new MasterMind(code);
+
+        ArrayList<Character> guess = new ArrayList<Character>();
+        guess.add('Y');
+        guess.add('G');
+        guess.add('G');
+        guess.add('G');
+
+
+        // when
+        List<Character> firstFeedback = masterMind.play(guess);
+
+        // then
+        assertThat(firstFeedback).containsExactly('R');
+
+        // and when
+        List<Character> secondFeedback = masterMind.play(guess);
+
+        // then
+        assertThat(secondFeedback).containsExactly('R');
+    }
+
+    @Test
+    public void tenFailedGuessesLosesTheGame() {
+
+        // given
+        ArrayList<Character> code = new ArrayList<Character>();
+        code.add('Y');
+        code.add('Y');
+        code.add('Y');
+        code.add('Y');
+
+        MasterMind masterMind = new MasterMind(code);
+
+        ArrayList<Character> guess = new ArrayList<Character>();
+        guess.add('G');
+        guess.add('G');
+        guess.add('G');
+        guess.add('G');
+
+        // given ten failed attempts
+        for(int i = 0; i < 10; i++) {
+            masterMind.play(guess);
+        }
+
+        // when an eleventh attempt
+        try {
+
+            masterMind.play(guess); // this should throw an exception
+            fail("should have thrown an exception");
+
+        } catch(RuntimeException e) {
+            // then
+            assertThat(e.getMessage()).isEqualTo("Game over, you lost!");
+        }
+
+    }
+
 }
