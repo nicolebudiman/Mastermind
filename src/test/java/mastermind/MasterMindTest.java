@@ -143,7 +143,35 @@ public class MasterMindTest {
     }
 
     @Test
-    public void sameGuessTwiceGetsSameFeedback() {
+    public void perfectMatchWinsAndEndsTheGame() {
+
+        // given
+        ArrayList<Character> code = new ArrayList<Character>();
+        code.add('B');
+        code.add('B');
+        code.add('B');
+        code.add('B');
+
+        MasterMind masterMind = new MasterMind(code);
+
+        // given a guess which matches the code
+        masterMind.play(code);
+
+        // when another guess is made
+        try {
+
+            masterMind.play(code); // this should throw an exception
+            fail("should have thrown an exception");
+
+        } catch(RuntimeException e) {
+            // then
+            assertThat(e.getMessage()).isEqualTo("Game over, you won!");
+        }
+
+    }
+
+    @Test
+    public void sameGuessThatDoesNotMatchTheCodeGetsSameFeedback() {
 
         // given
         ArrayList<Character> code = new ArrayList<Character>();

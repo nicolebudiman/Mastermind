@@ -8,12 +8,17 @@ public class MasterMind {
     private static int MAX_ATTEMPTS = 10;
     private List<Character> code;
     private int numAttempt = 0;
+    private boolean solved = false;
 
     public MasterMind(List<Character> code) {
         this.code = code;
     }
 
     public List<Character> play(List<Character> guess) {
+
+        if (solved == true) {
+            throw new RuntimeException("Game over, you won!");
+        }
 
         if (numAttempt == MAX_ATTEMPTS) {
             throw new RuntimeException("Game over, you lost!");
@@ -31,6 +36,7 @@ public class MasterMind {
         // TODO - once you have identified that guess[n] == code[n],
         //        then you must never compare anything to guess[n] or code[n]
 
+        int counter = 0;
         for (int guessIndex = 0; guessIndex < copyOfGuess.size(); guessIndex++) {
             for (int codeIndex = 0; codeIndex < copyOfCode.size(); codeIndex++) {
                 if (copyOfGuess.get(guessIndex) == copyOfCode.get(codeIndex)) {
@@ -40,6 +46,10 @@ public class MasterMind {
                         copyOfGuess.remove(guessIndex);
                         codeIndex--;
                         guessIndex--;
+                        counter++;
+                        if (counter == code.size()) {
+                            solved = true;
+                        }
                         break;
                     }
                     else {
