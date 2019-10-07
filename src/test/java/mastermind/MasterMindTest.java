@@ -3,11 +3,6 @@ package mastermind;
 import static org.assertj.core.api.Assertions.*;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
-
 public class MasterMindTest {
 
     @Test
@@ -19,22 +14,13 @@ public class MasterMindTest {
     public void noMatchesGetsNoFeedback() throws Exception {
 
         // given
-        List<Character> code = new LinkedList<>();
-        code.add('R');
-        code.add('R');
-        code.add('R');
-        code.add('R');
-
+        Character[] code = { 'R', 'R', 'R', 'R' };
         MasterMind masterMind = new MasterMind(code);
 
-        ArrayList<Character> guess = new ArrayList<Character>();
-        guess.add('Y');
-        guess.add('Y');
-        guess.add('Y');
-        guess.add('Y');
+        Character[] guess = { 'Y', 'Y', 'Y', 'Y' };
 
         // when
-        List<Character> feedback = masterMind.play(guess);
+        Character[] feedback = masterMind.play(guess);
 
         // then
         assertThat(feedback).isEmpty();
@@ -44,22 +30,13 @@ public class MasterMindTest {
     public void correctColorIncorrectPositionGetsOneWhite() throws Exception {
 
         // given
-        ArrayList<Character> code = new ArrayList<Character>();
-        code.add('R');
-        code.add('B');
-        code.add('R');
-        code.add('R');
-
+        Character[] code = { 'R', 'B', 'R', 'R' };
         MasterMind masterMind = new MasterMind(code);
 
-        ArrayList<Character> guess = new ArrayList<Character>();
-        guess.add('Y');
-        guess.add('Y');
-        guess.add('B');
-        guess.add('Y');
+        Character[] guess = { 'Y', 'Y', 'B', 'Y' };
 
         // when
-        List<Character> feedback = masterMind.play(guess);
+        Character[] feedback = masterMind.play(guess);
 
         // then
         assertThat(code).containsExactly('R', 'B', 'R', 'R');
@@ -71,22 +48,13 @@ public class MasterMindTest {
     public void correctColorCorrectPositionGetsOneRed() throws Exception {
 
         // given
-        ArrayList<Character> code = new ArrayList<Character>();
-        code.add('R');
-        code.add('B');
-        code.add('R');
-        code.add('R');
-
+        Character[] code = { 'R', 'B', 'R', 'R' };
         MasterMind masterMind = new MasterMind(code);
 
-        ArrayList<Character> guess = new ArrayList<Character>();
-        guess.add('Y');
-        guess.add('B');
-        guess.add('Y');
-        guess.add('Y');
+        Character[] guess = { 'Y', 'B', 'Y', 'Y' };
 
         // when
-        List<Character> feedback = masterMind.play(guess);
+        Character[] feedback = masterMind.play(guess);
 
         // then
         assertThat(feedback).containsExactly('R');
@@ -96,22 +64,13 @@ public class MasterMindTest {
     public void getsOneWhiteOneRed() throws Exception {
 
         // given
-        ArrayList<Character> code = new ArrayList<Character>();
-        code.add('R');
-        code.add('B');
-        code.add('R');
-        code.add('G');
-
+        Character[] code = { 'R', 'B', 'R', 'G' };
         MasterMind masterMind = new MasterMind(code);
 
-        ArrayList<Character> guess = new ArrayList<Character>();
-        guess.add('Y');
-        guess.add('B');
-        guess.add('G');
-        guess.add('Y');
+        Character[] guess = { 'Y', 'B', 'G', 'Y' };
 
         // when
-        List<Character> feedback = masterMind.play(guess);
+        Character[] feedback = masterMind.play(guess);
 
         // then
         assertThat(feedback).containsExactlyInAnyOrder('W', 'R');
@@ -121,22 +80,13 @@ public class MasterMindTest {
     public void perfectMatchGetsAllRed() throws Exception {
 
         // given
-        ArrayList<Character> code = new ArrayList<Character>();
-        code.add('B');
-        code.add('B');
-        code.add('B');
-        code.add('B');
-
+        Character[] code = { 'B', 'B', 'B', 'B' };
         MasterMind masterMind = new MasterMind(code);
 
-        ArrayList<Character> guess = new ArrayList<Character>();
-        guess.add('B');
-        guess.add('B');
-        guess.add('B');
-        guess.add('B');
+        Character[] guess = { 'B', 'B', 'B', 'B' };
 
         // when
-        List<Character> feedback = masterMind.play(guess);
+        Character[] feedback = masterMind.play(guess);
 
         // then
         assertThat(feedback).containsExactlyInAnyOrder('R', 'R', 'R', 'R');
@@ -146,12 +96,7 @@ public class MasterMindTest {
     public void perfectMatchWinsAndEndsTheGame() throws Exception {
 
         // given
-        ArrayList<Character> code = new ArrayList<Character>();
-        code.add('B');
-        code.add('B');
-        code.add('B');
-        code.add('B');
-
+        Character[] code = { 'B', 'B', 'B', 'B' };
         MasterMind masterMind = new MasterMind(code);
 
         // given a guess which matches the code
@@ -174,29 +119,20 @@ public class MasterMindTest {
     public void sameGuessThatDoesNotMatchTheCodeGetsSameFeedback() throws Exception {
 
         // given
-        ArrayList<Character> code = new ArrayList<Character>();
-        code.add('Y');
-        code.add('B');
-        code.add('Y');
-        code.add('Y');
+        Character[] code = { 'Y', 'B', 'Y', 'Y' };
 
         MasterMind masterMind = new MasterMind(code);
 
-        ArrayList<Character> guess = new ArrayList<Character>();
-        guess.add('Y');
-        guess.add('G');
-        guess.add('G');
-        guess.add('G');
-
+        Character[] guess = { 'Y', 'G', 'G', 'G' };
 
         // when
-        List<Character> firstFeedback = masterMind.play(guess);
+        Character[] firstFeedback = masterMind.play(guess);
 
         // then
         assertThat(firstFeedback).containsExactly('R');
 
         // and when
-        List<Character> secondFeedback = masterMind.play(guess);
+        Character[] secondFeedback = masterMind.play(guess);
 
         // then
         assertThat(secondFeedback).containsExactly('R');
@@ -206,19 +142,10 @@ public class MasterMindTest {
     public void tenFailedGuessesLosesTheGame() throws Exception {
 
         // given
-        ArrayList<Character> code = new ArrayList<Character>();
-        code.add('Y');
-        code.add('Y');
-        code.add('Y');
-        code.add('Y');
-
+        Character[] code = { 'Y', 'Y', 'Y', 'Y' };
         MasterMind masterMind = new MasterMind(code);
 
-        ArrayList<Character> guess = new ArrayList<Character>();
-        guess.add('G');
-        guess.add('G');
-        guess.add('G');
-        guess.add('G');
+        Character[] guess = { 'G', 'G', 'G', 'G' };
 
         // given ten failed attempts
         for(int i = 0; i < 10; i++) {
