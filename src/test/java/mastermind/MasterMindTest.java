@@ -130,7 +130,7 @@ public class MasterMindTest {
 
         } catch(GameWonException e) {
             // then
-            assertThat(e.getMessage()).isEqualTo("Game over, you won!");
+            assertThat(e.getAttempts()).isEqualTo(1);
         }
 
     }
@@ -180,7 +180,7 @@ public class MasterMindTest {
 
         } catch(GameLostException e) {
             // then
-            assertThat(e.getMessage()).isEqualTo("Game over, you lost!");
+            assertThat(e.getAttempts()).isEqualTo(10);
         }
 
     }

@@ -1,7 +1,7 @@
 package mastermind;
 
 public class GameLostException extends GameOverException {
-    public GameLostException(String message) {
-        super(message);
+    public GameLostException(int numAttempt) {
+        super(numAttempt);
     }
 }

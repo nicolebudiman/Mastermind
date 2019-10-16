@@ -1,7 +1,7 @@
 package mastermind;
 
 public class GameWonException extends GameOverException {
-    public GameWonException(String message) {
-        super(message);
+    public GameWonException(int numAttempt) {
+        super(numAttempt);
     }
 }

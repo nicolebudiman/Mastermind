@@ -26,11 +26,11 @@ public class MasterMind {
         }
 
         if (solved == true) {
-            throw new GameWonException("Game over, you won!");
+            throw new GameWonException(this.numAttempt);
         }
 
         if (numAttempt == MAX_ATTEMPTS) {
-            throw new GameLostException("Game over, you lost!");
+            throw new GameLostException(this.numAttempt);
         }
 
         this.numAttempt++;
