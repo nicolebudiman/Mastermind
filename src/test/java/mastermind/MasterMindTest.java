@@ -100,10 +100,10 @@ public class MasterMindTest {
     public void perfectMatchGetsAllRed() throws Exception {
 
         // given
-        Character[] code = { 'B', 'B', 'B', 'B' };
+        Character[] code = { 'B', 'G', 'R', 'Y' };
         MasterMind masterMind = new MasterMind(code);
 
-        Character[] guess = { 'B', 'B', 'B', 'B' };
+        Character[] guess = { 'B', 'G', 'R', 'Y' };
 
         // when
         Character[] feedback = masterMind.play(guess);
@@ -139,11 +139,11 @@ public class MasterMindTest {
     public void sameGuessThatDoesNotMatchTheCodeGetsSameFeedback() throws Exception {
 
         // given
-        Character[] code = { 'Y', 'B', 'Y', 'Y' };
+        Character[] code = { 'Y', 'B', 'G', 'R' };
 
         MasterMind masterMind = new MasterMind(code);
 
-        Character[] guess = { 'Y', 'G', 'G', 'G' };
+        Character[] guess = { 'Y', 'P', 'O', 'W' };
 
         // when
         Character[] firstFeedback = masterMind.play(guess);

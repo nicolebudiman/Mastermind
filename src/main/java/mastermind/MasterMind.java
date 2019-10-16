@@ -11,14 +11,18 @@ public class MasterMind {
     private int numAttempt = 0;
     private boolean solved = false;
 
-    // TODO - Challenge: make this accept Character[] rather than List<Character>
+    private boolean isSameColor(char guessColor, char codeColor) {
+        return guessColor == codeColor;
+    }
+
+    private boolean isSamePosition(int guessPosition, int codePosition) {
+        return guessPosition == codePosition;
+    }
+
     public MasterMind(Character[] code) {
         this.code = code;
     }
 
-    // TODO - together, let's change this to throw a specific GameOverException
-    // indicating won or lost, rather than GameOverException(..) with a message
-    // TODO - change this to accept and return Character[] rather than List<Character>
     public Character[] play(Character[] guess) throws GameOverException {
 
         if (guess.length != this.code.length) {
@@ -45,27 +49,42 @@ public class MasterMind {
         // TODO - once you have identified that guess[n] == code[n],
         //        then you must never compare anything to guess[n] or code[n]
 
-        int counter = 0;
-        for (int guessIndex = 0; guessIndex < copyOfGuess.size(); guessIndex++) {
-            for (int codeIndex = 0; codeIndex < copyOfCode.size(); codeIndex++) {
-                if (copyOfGuess.get(guessIndex) == copyOfCode.get(codeIndex)) {
-                    if (guessIndex == codeIndex) {
-                        feedback.add('R');
-                        copyOfCode.remove(codeIndex);
-                        copyOfGuess.remove(guessIndex);
-                        codeIndex--;
-                        guessIndex--;
-                        counter++;
-                        if (counter == code.length) {
-                            solved = true;
+
+        // for each component in guess,
+        // for each component in code,
+        // if(isSameColor(current component in guess, current component in code)) {
+        //      isSamePosition(current position in guess, current position in code) {
+        //          "R"
+        //          remove component from code and guess
+        //          if isLastComponent, solved = true
+        //      }
+        //      else "W"
+        // }
+        // else, go to the next component
+
+
+
+        List<Integer> positionsWithExactMatch = new ArrayList<>();
+            for (int guessIndex = 0; guessIndex < copyOfGuess.size(); guessIndex++) {
+                    for (int codeIndex = 0; codeIndex < copyOfCode.size(); codeIndex++) {
+                        if(!positionsWithExactMatch.contains(codeIndex)) {
+                            if (isSameColor(copyOfGuess.get(guessIndex), copyOfCode.get(codeIndex))) {
+                                if (isSamePosition(guessIndex, codeIndex)) {
+                                    positionsWithExactMatch.add(codeIndex);
+                                } else {
+                                    feedback.add('W');
+                                }
+                            }
                         }
-                        break;
-                    }
-                    else {
-                        feedback.add('W');
-                    }
                 }
             }
+
+        for(Integer positionOfExactMatch : positionsWithExactMatch) {
+            feedback.add('R');
+        }
+
+        if(positionsWithExactMatch.size() == code.length) {
+            solved = true;
         }
 
         return feedback.toArray(new Character[feedback.size()]);
