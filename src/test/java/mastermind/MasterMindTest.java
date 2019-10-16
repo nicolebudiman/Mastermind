@@ -27,6 +27,26 @@ public class MasterMindTest {
     }
 
     @Test
+    public void guessMustBeSameLengthAsCode() throws Exception {
+        // given
+        Character[] code = { 'R', 'R', 'R', 'R' };
+        MasterMind masterMind = new MasterMind(code);
+
+        Character[] guess = { 'Y' };
+
+        // when
+        try {
+            masterMind.play(guess); // this should throw an exception
+            fail("should have thrown an exception");
+
+        } catch(IllegalArgumentException e) {
+            // then
+            assertThat(e.getMessage()).isEqualTo("Guess must be same length as code");
+        }
+
+    }
+
+    @Test
     public void correctColorIncorrectPositionGetsOneWhite() throws Exception {
 
         // given

@@ -21,6 +21,10 @@ public class MasterMind {
     // TODO - change this to accept and return Character[] rather than List<Character>
     public Character[] play(Character[] guess) throws GameOverException {
 
+        if (guess.length != this.code.length) {
+            throw new IllegalArgumentException("Guess must be same length as code");
+        }
+
         if (solved == true) {
             throw new GameOverException("Game over, you won!");
         }
