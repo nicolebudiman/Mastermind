@@ -128,7 +128,7 @@ public class MasterMindTest {
             masterMind.play(code); // this should throw an exception
             fail("should have thrown an exception");
 
-        } catch(GameOverException e) {
+        } catch(GameWonException e) {
             // then
             assertThat(e.getMessage()).isEqualTo("Game over, you won!");
         }
@@ -178,7 +178,7 @@ public class MasterMindTest {
             masterMind.play(guess); // this should throw an exception
             fail("should have thrown an exception");
 
-        } catch(GameOverException e) {
+        } catch(GameLostException e) {
             // then
             assertThat(e.getMessage()).isEqualTo("Game over, you lost!");
         }
