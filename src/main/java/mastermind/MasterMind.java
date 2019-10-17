@@ -49,28 +49,14 @@ public class MasterMind {
         // TODO - once you have identified that guess[n] == code[n],
         //        then you must never compare anything to guess[n] or code[n]
 
-
-        // for each component in guess,
-        // for each component in code,
-        // if(isSameColor(current component in guess, current component in code)) {
-        //      isSamePosition(current position in guess, current position in code) {
-        //          "R"
-        //          remove component from code and guess
-        //          if isLastComponent, solved = true
-        //      }
-        //      else "W"
-        // }
-        // else, go to the next component
-
-
-
         List<Integer> positionsWithExactMatch = new ArrayList<>();
             for (int guessIndex = 0; guessIndex < copyOfGuess.size(); guessIndex++) {
                     for (int codeIndex = 0; codeIndex < copyOfCode.size(); codeIndex++) {
-                        if(!positionsWithExactMatch.contains(codeIndex)) {
+                        if(!positionsWithExactMatch.contains(guessIndex) && !positionsWithExactMatch.contains(codeIndex)) {
                             if (isSameColor(copyOfGuess.get(guessIndex), copyOfCode.get(codeIndex))) {
                                 if (isSamePosition(guessIndex, codeIndex)) {
                                     positionsWithExactMatch.add(codeIndex);
+
                                 } else {
                                     feedback.add('W');
                                 }

@@ -100,10 +100,10 @@ public class MasterMindTest {
     public void perfectMatchGetsAllRed() throws Exception {
 
         // given
-        Character[] code = { 'B', 'G', 'R', 'Y' };
+        Character[] code = { 'B', 'B', 'B', 'B' };
         MasterMind masterMind = new MasterMind(code);
 
-        Character[] guess = { 'B', 'G', 'R', 'Y' };
+        Character[] guess = { 'B', 'B', 'B', 'B' };
 
         // when
         Character[] feedback = masterMind.play(guess);
@@ -133,6 +133,22 @@ public class MasterMindTest {
             assertThat(e.getAttempts()).isEqualTo(1);
         }
 
+    }
+
+    @Test
+    public void getsOneRedAndOneWhite() throws Exception {
+
+        // given
+        Character[] code = { 'B', 'G', 'G', 'O' };
+        MasterMind masterMind = new MasterMind(code);
+
+        Character[] guess = { 'O', 'G', 'R', 'Y' };
+
+        // when
+        Character[] feedback = masterMind.play(guess);
+
+        // then
+        assertThat(feedback).containsExactlyInAnyOrder('R', 'W');
     }
 
     @Test
